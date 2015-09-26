@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- http://192.168.1.150:8080 -->
+    <!-- http://113.105.94.20:8080 -->
+    <string name="server_host_release">http://113.105.94.20:8080</string>
+    <string name="version">1.2.1</string>
+    <string name="app_name">建安</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="login">登陆</string>
+    <string name="more">更多</string>
+    <string name="zaixianyw">在线业务</string>
+    <string name="user_hint">手机号/用户名/邮箱</string>
+    <string name="pwd_hint">请输入密码</string>
+    <string name="resign_text">用户注册</string>
+    <string name="fpwd_text">忘记密码?</string>
+    <string name="resign">注册</string>
+    <string name="success_resign">注册成功</string>
+    <string name="city">国家地区</string>
+    <string name="phone">手机号码</string>
+    <string name="realname">真实姓名</string>
+    <string name="name">昵称</string>
+    <string name="email">邮件</string>
+    <string name="userpwd">用户密码</string>
+    <string name="name_hint">请输入您的姓名</string>
+    <string name="phone_hint">请输入您的手机号码</string>
+    <string name="username_hint">请输入您的用户名称</string>
+    <string name="email_hint">请输入您的邮箱号码</string>
+    <string name="userpwd_hint">请输入您的用户密码</string>
+    <string name="feedback_hint">请输入反馈意见</string>
+    <string name="xieyi">我已看过并同意建安保险</string>
+    <string name="tonyixieyi">请勾选同意协议后注册</string>
+    <string name="errorphone">手机号码不能为空</string>
+    <string name="errorname">昵称不能为空</string>
+    <string name="erroremail">邮箱不能为空</string>
+    <string name="errorrealname">真实姓名不能为空</string>
+    <string name="errorpass">密码不能为空</string>
+    <string name="longin_failed">登陆失败</string>
+    <string name="Please_enter_correct_phone">请输入正确手机号</string>
+    <string name="email163_cannot_resign">136邮箱暂时不能注册</string>
+    <string name="exit">再按一次退出程序</string>
+    <string name="membercenter">会员中心</string>
+    <string name="jaiabaoxian">建安保险</string>
+    <string name="pasonalinfor">个人信息</string>
+    <string name="accountinfor">账户信息</string>
+    <string name="accountbalance">账户余额</string>
+    <string name="bangzhu">用户帮助</string>
+    <string name="huiyuan"> 会    员</string>
+    <string name="recharge">充值</string>
+    <string name="recharge_recode">充值记录</string>
+    <string name="account_date">时间</string>
+    <string name="account_type">充值类型</string>
+    <string name="account_mony">充值金额</string>
+    <string name="suggesttion">对建安保险手机客户端有任何意见或建议，请提交给我们，让手机建安保险不断进步！ 对于建安保险订购的产品有任何疑问请拨打客服电话4008833966.</string>
+    <string name="baoxianguize">本人已认真阅读所投保险种条款、投保须知、投保规则、理赔须知、前海人寿团险职业分类表、投保声明书内容并完全理解保险责任、责任免除等保险条款的各项内容。除由贵公司经正式程序修改或批注的内容外，其他任何人的口头及书面陈述、报告或附约，贵公司无需负责。</string>
+    <string name="dingdanjiaoyi">订单交易记录</string>
+    <string name="tbrxx">被保人信息</string>
+    <string name="syrxx">投保人信息</string>
+
+    <!-- 支付宝 -->
+    <string name="Ensure">"确定"</string>
+    <string name="Cancel">"取消"</string>
+    <string name="confirm_install_hint">"安装提示"</string>
+    <string name="confirm_install">"为保证您的交易安全，需要您安装支付宝安全支付服务，才能进行付款。\n\n点击确定，立即安装。"</string>
+    <string name="check_sign_failed">您的订单信息已被非法篡改。</string>
+    <string name="remote_call_failed">Failure calling remote service</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_account_record">AccountRecordActivity</string>
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="title_activity_product_list">ProductListActivity</string>
+    <string name="priductlist">产品详情</string>
+    <string name="paymony">支付金额</string>
+    <string name="paydate">保障时间：</string>
+    <string name="baoxianxieyi">我已看过并同意保险</string>
+    <string name="title_activity_product_information">ProductInformationActivity</string>
+    <string name="title_activity_product_xie_yi">ProductXieYi</string>
+    <string name="title_activity_qian_hai_inf_qd">QianHaiInfQdActivity</string>
+    <string name="title_activity_success_qian_hai">SuccessQianHaiActivity</string>
+    <string name="title_activity_ping_an_yi_jian">PingAnYiJianActivity</string>
+    <string name="title_activity_ping_an_yi_jian_adapter">PingAnYiJianAdapter</string>
+    <string name="title_activity_ping_an_yi_jian_que_ren">PingAnYiJianQueRen</string>
+
+</resources>

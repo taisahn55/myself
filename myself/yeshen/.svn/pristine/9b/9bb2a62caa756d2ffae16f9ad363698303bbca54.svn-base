@@ -1,0 +1,23 @@
+package com.example.login_utils;
+
+public class WapConstant {
+	
+	public static String URLSTRING = "http://123.1.149.100:8080/InsuranceService/back/";
+	
+	public static String URLIMAGEString = "http://123.1.149.100:8080/InsuranceData";
+	//读取版本号
+	public static String READ_VERSION ="http://123.1.149.100:8080/InsuranceData/Down/version.xml";
+	//注册
+	public static String INSERTString = "salesman_registerByMobile.action";
+	//登陆
+	public static String LOGINString = "salesman_login.action";
+	//修改密码
+	public static String UPDATEPASS = "salesman_modifyPass.action";
+	//添加银行卡
+	public static String ADDBANKString = "salesman_updateByMobile.action";
+	//修改个人资料
+	public static String UPDATEString= "salesman_updateByMobile.action";
+	//添加证件信息
+	public static String iNSERTIDString = "salesman_updateZJ.action";
+	
+}

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hongguang.jaia"
+    android:versionCode="14"
+    android:versionName="1.0" >
+
+    <!-- 内存卡权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CAMERA" >
+    </uses-permission>
+   
+
+    <!-- 分享权限 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- 蓝牙分享所需的权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
+
+        <!-- 分享 -->
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <intent-filter>
+                <data android:scheme="tencent100371282" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 微信分享回调 -->
+        <activity
+            android:name="com.hongguang.jaia.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- 欢迎界面 -->
+        <activity
+            android:name="com.hongguang.jaia.WelcomeActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.hongguang.jaia.RegisterActivity" >
+        </activity>
+        <activity android:name="com.hongguang.jaia.CitySelectActivity" >
+        </activity>
+        <activity android:name="com.hongguang.jaia.product.ProductJiaoYi" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_main.EditDate" >
+        </activity>
+        <activity android:name="com.hongguang.jaia.LoginActivity" >
+        </activity>
+        <activity android:name="com.hongguang.jaia.OnLineSale" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_main.UpdatePwd" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_main.Financial" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_main.MainActivity" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_main.FinancialBank" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_main.Certificates" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_main.Editficates" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_chexian.InsureActivity" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_chexian.BasicInformation" >
+        </activity>
+        
+        <activity android:name="com.hongguang.jaia_accountinfor.AccountInforActivity" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_accountinfor.RechargeActivity" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_feedback.FeedbackActivity" >
+        </activity>
+        <activity android:name="com.alipay.sdk.pay.demo.PayDemoActivity" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_product.ProductActivity" >
+        </activity>
+        <activity android:name="com.hongguang.jaia_product.ProductJiaoYi" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia_product.Inforedt"
+            android:launchMode="singleTask" >
+        </activity>
+        <!-- alipay sdk begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+        <!-- alipay sdk end -->
+        <activity
+            android:name="com.hongguang.jaia_accountinfor.AccountActivity"
+            android:label="@string/title_activity_account" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia_accountinfor.AccountRecordActivity"
+            android:label="@string/title_activity_account_record" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia_product.ProductListActivity"
+            android:label="@string/title_activity_product_list" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia_product.ProductInformationActivity"
+            android:label="@string/title_activity_product_information" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia.product.ProductXieYi"
+            android:theme="@style/AppBaseTheme" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia_product.ProductXieYi"
+            android:label="@string/title_activity_product_xie_yi" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia_product.QianHaiInfQdActivity"
+            android:label="@string/title_activity_qian_hai_inf_qd" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia_product.SuccessQianHaiActivity"
+            android:label="@string/title_activity_success_qian_hai" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia_product.PingAnYiJianActivity"
+            android:label="@string/title_activity_ping_an_yi_jian" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia.PingAnYiJianAdapter"
+            android:label="@string/title_activity_ping_an_yi_jian_adapter" >
+        </activity>
+        <activity
+            android:name="com.hongguang.jaia_product.PingAnYiJianQueRen"
+            android:label="@string/title_activity_ping_an_yi_jian_que_ren" >
+        </activity>
+    </application>
+
+  
+
+</manifest>

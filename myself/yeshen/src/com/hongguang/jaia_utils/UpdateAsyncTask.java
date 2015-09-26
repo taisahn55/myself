@@ -1,0 +1,123 @@
+package com.hongguang.jaia_utils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Environment;
+
+import com.hongguang.jaia_view.DownLoadDialog;
+
+/**
+ * 更新异步加载类
+ * 
+ */
+public class UpdateAsyncTask extends AsyncTask<String, Integer, Boolean> {
+
+	private String apk_path = Environment.getExternalStorageDirectory()
+			+ "/love";
+	private Context context;
+	private String appName;
+	private DownLoadDialog dialog;
+	private DateSharedPreferences dsp = DateSharedPreferences.getInstance();
+
+	public UpdateAsyncTask(Context context, DownLoadDialog dialog) {
+		super();
+		this.context = context;
+		this.dialog = dialog;
+	}
+
+	@Override
+	protected void onProgressUpdate(Integer... progress) {
+		// System.out.println("加载了百分之"+progress[0]);
+		if (progress[0] > 0) {
+			dialog.setProgress(progress[0]);
+		}
+	}
+
+	@Override
+	protected Boolean doInBackground(String... params) {
+		// System.out.println("执行doInbackGround方法");
+		String url = params[0];
+		// System.out.println("url为:"+url);
+		appName = url.substring(url.lastIndexOf("/"), url.length());
+		HttpClient client = new DefaultHttpClient();
+		HttpGet get = new HttpGet(url);
+		HttpResponse response;
+		try {
+			response = client.execute(get);
+			if (response.getStatusLine().getStatusCode() == 200) {
+				HttpEntity entity = response.getEntity();
+				long length = entity.getContentLength();
+				InputStream is = entity.getContent();
+				FileOutputStream fileOutputStream = null;
+				if (is != null) {
+					File file = new File(apk_path);
+					if (!file.exists() || !file.isDirectory()) {
+						file.mkdir();
+					}
+					file = new File(apk_path, appName);
+					fileOutputStream = new FileOutputStream(file);
+					byte[] buf = new byte[1024];
+					int ch = -1;
+					int count = 0;
+					while ((ch = is.read(buf)) != -1) {
+						fileOutputStream.write(buf, 0, ch);
+						count += ch;
+						if ((int) ((count * 100) / length) > 0) {
+							publishProgress((int) ((count * 100) / length)); // 更新下载百分比
+						}
+					}
+					fileOutputStream.flush();
+					is.close();
+					fileOutputStream.close();
+					System.out.println("加载完成！");
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} catch (ClientProtocolException e1) {
+			e1.printStackTrace();
+			return false;
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	protected void onPostExecute(Boolean result) {
+
+		if (result) {
+			openapk();
+		}
+	}
+
+	private void openapk() {
+		Intent intent1 = new Intent();
+		intent1.setAction(Intent.ACTION_DELETE);
+		intent1.setData(Uri.parse("package:com.hongguang.love"));
+		context.startActivity(intent1);
+
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		intent.setDataAndType(Uri.fromFile(new File(apk_path + appName)),
+				"application/vnd.android.package-archive");
+		context.startActivity(intent);
+	}
+
+}

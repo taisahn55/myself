@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="保险类别"
+            android:textColor="@color/maintext"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#CFCFCF" />
+
+    <RadioGroup
+        android:id="@+id/radiogroup_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/but1_menu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/maintext"
+            android:button="@null"
+            android:gravity="center"
+            android:checked="true"
+            android:onClick="but1"
+            android:text="人寿险"
+            android:textColor="#ffffff" />
+
+        <RadioButton
+            android:id="@+id/but2_menu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:background="@color/maintext"
+            android:button="@null"
+            android:onClick="but2"
+            android:text="平安险"
+            android:textColor="#ffffff" />
+
+        <RadioButton
+            android:id="@+id/but3_menu"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:background="@color/maintext"
+            android:button="@null"
+            android:onClick="but3"
+            android:text="综合险"
+            android:textColor="#ffffff" />
+    </RadioGroup>
+
+</LinearLayout>

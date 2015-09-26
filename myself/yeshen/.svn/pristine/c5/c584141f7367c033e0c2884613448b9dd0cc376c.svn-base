@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/finabank"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="财务信息"
+            android:textColor="#61b44c"
+            android:textSize="23sp" />
+
+        <ImageView
+            android:id="@+id/addbank"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/addfinancial" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#CFCFCF" />
+
+    <RelativeLayout
+        android:id="@+id/finabanks"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" >
+
+        <ImageView
+            android:id="@+id/image_bank"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/jianshe" />
+
+        <TextView
+            android:id="@+id/name_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/image_bank"
+            android:text="招商银行"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/kaname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/name_bank"
+            android:layout_marginBottom="2dp"
+            android:layout_toRightOf="@+id/image_bank"
+            android:text="王祖蓝"
+            android:textSize="14dp" />
+
+
+        <TextView
+            android:id="@+id/types_bank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/name_bank"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="5dp"
+            android:text="储蓄卡"
+            android:textSize="14dp" />
+        
+           <TextView
+            android:id="@+id/num_bank"
+            android:layout_toLeftOf="@id/types_bank"
+            android:layout_below="@id/name_bank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="5dp"
+            android:text="卡号"
+            android:textSize="14dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#CFCFCF" />
+
+</LinearLayout>

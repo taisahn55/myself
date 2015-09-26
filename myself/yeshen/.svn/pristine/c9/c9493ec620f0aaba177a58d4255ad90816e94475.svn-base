@@ -1,0 +1,195 @@
+package com.example.login_main;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.login.R;
+import com.example.login.RegisterActivity;
+import com.example.login_bean.Salesman;
+import com.example.login_task.HttpUtils;
+import com.example.login_utils.Constant;
+import com.example.login_utils.DateSharedPreferences;
+import com.example.login_utils.WapConstant;
+
+public class EditDate extends Activity implements OnClickListener {
+	private DateSharedPreferences dateSharedPreferences;
+	private Salesman salesman;
+	private TextView upname, uprealname, upphone, upemail, upnowaddress,
+			upworkaddress, preservation;
+	private RadioButton sex, sex1;
+	private RadioGroup radiogroup;
+	private ImageView edit_back;
+	private String s1 = "1[0-9]{10}",s2="[a-zA-Z-0-9]{0,99}@136.com";
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.editdate);
+		dateSharedPreferences = DateSharedPreferences.getInstance();
+		salesman = Constant.getGson().fromJson(
+				dateSharedPreferences.getLogin(this), Salesman.class);
+		InitView();
+	}
+
+	private RadioGroup.OnCheckedChangeListener mradiogroup = new RadioGroup.OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(RadioGroup group, int checkedId) {
+			if (checkedId == sex1.getId()) {
+				i = i+1;
+				salesman.setSex(sex1.getText().toString().trim());
+			} else if (checkedId == sex.getId()) {
+				i = i+1;
+				salesman.setSex(sex.getText().toString().trim());
+			}
+		}
+	};
+
+	private void InitView() {
+		//
+		upname = (TextView) findViewById(R.id.upname);
+		upname.setText(salesman.getName());
+
+		uprealname = (TextView) findViewById(R.id.uprealname);
+		uprealname.setText(salesman.getRealName());
+
+		sex = (RadioButton) findViewById(R.id.sex);
+		sex1 = (RadioButton) findViewById(R.id.sex1);
+
+		if ("男".equals(salesman.getSex())) {
+			sex.setChecked(true);
+		} else if ("女".equals(salesman.getSex())) {
+			sex1.setChecked(true);
+		}
+
+		upphone = (TextView) findViewById(R.id.upphone);
+		upphone.setText(salesman.getPhone());
+
+		upemail = (TextView) findViewById(R.id.upemail);
+		upemail.setText(salesman.getEmail());
+
+		upnowaddress = (TextView) findViewById(R.id.upnowaddress);
+		upnowaddress.setText(salesman.getNowAddr());
+
+		upworkaddress = (TextView) findViewById(R.id.upworkaddress);
+		upworkaddress.setText(salesman.getWorkAddr());
+
+		preservation = (TextView) findViewById(R.id.preservation);
+		preservation.setOnClickListener(this);
+
+		edit_back = (ImageView) findViewById(R.id.edit_back);
+		edit_back.setOnClickListener(this);
+
+		radiogroup = (RadioGroup) findViewById(R.id.radiogroup1);
+		radiogroup.setOnCheckedChangeListener(mradiogroup);
+	}
+	private int i = 0;
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.preservation:
+			
+			if (!TextUtils.isEmpty(upname.getText())) {
+				i = i + 1;
+				salesman.setName(upname.getText().toString().trim());
+			}
+			if (!TextUtils.isEmpty(uprealname.getText())) {
+				i = i + 1;
+				salesman.setRealName(uprealname.getText().toString().trim());
+			}
+			if (!TextUtils.isEmpty(upphone.getText())) {
+				i = i + 1;
+				salesman.setPhone(upphone.getText().toString().trim());
+			}
+			if (!TextUtils.isEmpty(upemail.getText())) {
+				i = i + 1;
+				salesman.setEmail(upemail.getText().toString().trim());
+			}
+			if (!TextUtils.isEmpty(upnowaddress.getText())) {
+				i = i + 1;
+				salesman.setNowAddr(upnowaddress.getText().toString().trim());
+			}
+			if (!TextUtils.isEmpty(upworkaddress.getText())) {
+				i = i + 1;
+				salesman.setWorkAddr(upworkaddress.getText().toString().trim());
+			}
+			if (i == 0) {
+				Toast.makeText(EditDate.this, "没有做任何修改哦", Toast.LENGTH_SHORT)
+						.show();
+				return;
+			}
+			//判断手机号码是否开头为1
+			Pattern p = Pattern.compile(s1);
+			Matcher m = p.matcher(upphone.getText().toString());
+			System.out.println("手机号码"+upphone.getText().toString());
+			if(!m.matches()){			
+				Toast.makeText(EditDate.this, "请输入正确的手机号",1000).show();
+				return;
+			}
+			//判断邮箱不能为@136.com
+			Pattern p1 = Pattern.compile(s2);
+			Matcher m1 = p1.matcher(upemail.getText().toString());
+			if(m1.matches()){			
+				Toast.makeText(EditDate.this, "136邮箱暂时不能注册",1000).show();
+				return;
+			}
+
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("salesbean", Constant.getGson()
+					.toJson(salesman)));
+			new Thread(new HttpUtils(mHandler,
+					WapConstant.URLSTRING + WapConstant.UPDATEString, params)).start();
+
+			break;
+		case R.id.edit_back:
+			EditDate.this.finish();
+			break;
+		default:
+			break;
+		}
+	}
+
+	private Handler mHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			int m = msg.arg1;
+			if (m == 200) {
+				if (msg.obj.toString().contains("success")) {
+					Toast.makeText(EditDate.this, "修改资料成功", Toast.LENGTH_LONG)
+							.show();
+					dateSharedPreferences.saveLogin(EditDate.this, Constant
+							.getGson().toJson(salesman));
+					EditDate.this.finish();
+				} else {
+					Log.e("dong", "响应:" + m);
+					Log.e("dong", "响应:" + msg.obj.toString());
+					Toast.makeText(EditDate.this, msg.obj.toString(),
+							Toast.LENGTH_LONG).show();
+				}
+			} else {
+				Log.e("dong", "响应:" + m);
+				Log.e("dong", "响应:" + msg.obj.toString());
+				Toast.makeText(EditDate.this, msg.obj.toString(),
+						Toast.LENGTH_LONG).show();
+			}
+		};
+	};
+
+}

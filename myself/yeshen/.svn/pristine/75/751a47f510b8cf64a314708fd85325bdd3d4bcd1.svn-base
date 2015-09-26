@@ -1,0 +1,364 @@
+package com.example.login_main;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.login.LoginActivity;
+import com.example.login.R;
+import com.example.login.WelcomeActivity;
+import com.example.login_bean.Salesman;
+import com.example.login_task.GetDataFromWeb;
+import com.example.login_utils.BitmapLruCache;
+import com.example.login_utils.Constant;
+import com.example.login_utils.DateSharedPreferences;
+import com.example.login_utils.SaxParseXml;
+import com.example.login_utils.UpdateApkSearchUtils;
+import com.example.login_utils.WapConstant;
+import com.example.login_view.DialogView;
+import com.example.login_view.DialogView.OnBtnClickListener;
+
+@SuppressLint("NewApi")
+public class PersonalInforActivity extends Activity implements OnClickListener {
+	private TextView edit, mainname, realname, sex, phone, email, nowaddress,
+			workaddress, stop;
+	private ImageView imageView;
+	private LinearLayout updatepwd, financial, certifLayout;
+	private DateSharedPreferences dsp;
+	private BitmapLruCache mBitmapLruCache;
+	private Salesman salesman;
+
+	private Handler handler;
+	private String TAG = "MainActivity";
+	private String APK_PATH = Environment.getExternalStorageDirectory()
+			+ "/saleman_cahe/";
+	private File file = new File(APK_PATH, "Login.apk");
+	private Context context;
+	private UpdateApkSearchUtils updateApk;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		context = this;
+
+		// 首先判断是否跟新最新apk
+		updateApk = new UpdateApkSearchUtils(context);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_personalinfor);
+		dsp = DateSharedPreferences.getInstance();
+
+		// 创建handler实体
+		handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				if (msg.what == 1001) {
+					final ArrayList<String> versionDatas = (ArrayList<String>) msg.obj;
+					if (!TextUtils.isEmpty(versionDatas.get(0))
+							&& !TextUtils.isEmpty(versionDatas.get(1))
+							&& !TextUtils.isEmpty(versionDatas.get(2))) {
+						Log.d(TAG, "读取到的最新版本号为：" + versionDatas.get(0) + "包名为："
+								+ versionDatas.get(1) + "APK下载路径为："
+								+ versionDatas.get(2));
+						if (updateApk.installedApkIsWebLastestVersion(
+								Integer.valueOf(versionDatas.get(0)),
+								versionDatas.get(1))) {
+							Log.d(TAG, "检测到安装的是最新版本");
+							return;
+						} else {
+							if (updateApk.fileIsWebLastestVersion(
+									Integer.valueOf(versionDatas.get(0)),
+									versionDatas.get(1), file)) {
+								// TODO
+								Log.d(TAG, "检测到本地apk是网络上最新版本，执行安装请求");
+								updateApk.installApk(file);
+							} else {
+								Log.d(TAG, "检测本地apk不是最新版本请求下载");
+								WelcomeActivity.pool.submit(new Runnable() {
+									public void run() {
+										if (new GetDataFromWeb(context)
+												.loadFile(versionDatas.get(2),
+														file)) {
+											handler.sendEmptyMessage(999);
+										}
+									}
+								});
+							}
+						}
+					}
+				} else if (msg.what == 999) {
+					// TODO
+					Log.d(TAG, "检测到本地apk是网络上最新版本，执行安装请求");
+					updateApk.installApk(file);
+				}
+			}
+		};
+	}
+
+	private void checkWapLastestVersion() {
+		try {
+			// 第一次进来 read_version_time 在缓存里面是空 所以readVersionTime为0
+
+			String readVersionTime = dsp.get(this, "read_version_time", "0");
+
+			Log.e("fffffffffffffffffff",
+					Long.toString((Long.valueOf(readVersionTime))
+							/ (24l * 60l * 60l * 1000l)));
+
+			// 获取当前时间 -
+			// long time_dif = (System.currentTimeMillis() -
+			// Long.valueOf(readVersionTime)) / (24l * 60l * 60l * 1000l);
+
+			// 获取两个时间相差的毫秒数
+			long time_dif = System.currentTimeMillis()
+					- Long.valueOf(readVersionTime);
+
+			// 获取相差天数
+			time_dif = time_dif / (24l * 60l * 60l * 1000l);
+			// 如果天数小于1 则执行
+			if (time_dif < 1l) {
+				Log.d(TAG, "读取版本号时间不到一天");
+				return;
+			} else {
+				// 如果天数大于1则执行
+				dsp.save(this, "read_version_time", System.currentTimeMillis()
+						+ "");
+				WelcomeActivity.pool.submit(new Runnable() {
+
+					@Override
+					public void run() {
+						InputStream is = null;
+						try {
+							URL url = new URL(WapConstant.READ_VERSION);
+
+							HttpURLConnection con = (HttpURLConnection) url
+									.openConnection();
+							con.setReadTimeout(3000);
+							con.setConnectTimeout(3000);
+							is = con.getInputStream();
+							// 调用sax解析返回一个字符串
+							ArrayList<String> versionDatas = new SaxParseXml()
+									.getDatas(is);
+
+							for (String s : versionDatas) {
+								Log.d(TAG, "XML解析为：" + s);
+							}
+
+							Message msg = handler.obtainMessage();
+							msg.what = 1001;
+							msg.obj = versionDatas;
+							handler.sendMessage(msg);
+						} catch (Exception e) {
+							e.printStackTrace();
+						} finally {
+							try {
+								is.close();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				});
+			}
+		} catch (Exception e) {
+			Log.d(TAG, "获取包信息失败！");
+		}
+	}
+
+	@Override
+	protected void onStart() {
+
+		salesman = Constant.getGson().fromJson(dsp.getLogin(this),
+				Salesman.class);
+
+		InitView();
+		checkWapLastestVersion();
+		super.onStart();
+	}
+
+	private void InitView() {
+		edit = (TextView) findViewById(R.id.edit);
+		edit.setOnClickListener(this);
+		//
+		mainname = (TextView) findViewById(R.id.names);
+		mainname.setText(salesman.getName());
+		// mainname.setText("111");
+		realname = (TextView) findViewById(R.id.realname);
+		realname.setText(salesman.getRealName());
+		sex = (TextView) findViewById(R.id.sex);
+		sex.setText(salesman.getSex());
+		phone = (TextView) findViewById(R.id.phone);
+		phone.setText(salesman.getPhone());
+		email = (TextView) findViewById(R.id.email);
+		email.setText(salesman.getEmail());
+		nowaddress = (TextView) findViewById(R.id.nowaddress);
+		nowaddress.setText(salesman.getNowAddr());
+		workaddress = (TextView) findViewById(R.id.workaddress);
+		workaddress.setText(salesman.getWorkAddr());
+		stop = (TextView) findViewById(R.id.stop);
+		stop.setOnClickListener(this);
+		// 图片
+		imageView = (ImageView) findViewById(R.id.imageView);
+		imageView.setOnClickListener(this);
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				GetDataFromWeb get = new GetDataFromWeb(PersonalInforActivity.this);
+				byte[] date = get.getData(WapConstant.URLIMAGEString
+						+ salesman.getQrcode());
+				Message msg = mHandler.obtainMessage();
+				msg.obj = date;
+				msg.arg1 = 1;
+				mHandler.sendMessage(msg);
+			}
+		}).start();
+
+		updatepwd = (LinearLayout) findViewById(R.id.updatepwd);
+		updatepwd.setOnClickListener(this);
+
+		financial = (LinearLayout) findViewById(R.id.financial);
+		financial.setOnClickListener(this);
+
+		certifLayout = (LinearLayout) findViewById(R.id.certif);
+		certifLayout.setOnClickListener(this);
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		Intent intent = null;
+		switch (v.getId()) {
+		case R.id.edit:
+			intent = new Intent();
+			intent.setClass(PersonalInforActivity.this, EditDate.class);
+			startActivity(intent);
+			break;
+		case R.id.stop:
+			DialogView dialogView = new DialogView(PersonalInforActivity.this,
+					R.layout.dialogview, R.style.pager_dialog, null);
+			dialogView.setOnBtnClickListener(new OnBtnClickListener() {
+				@Override
+				public void onclick(int i) {
+					if (i == 0) {
+						finish();
+						System.exit(0);
+					} else if (i == 1) {
+						dsp.clearLogin(PersonalInforActivity.this);
+						Intent intent = new Intent();
+						intent.setClass(PersonalInforActivity.this, LoginActivity.class);
+						startActivity(intent);
+						PersonalInforActivity.this.finish();
+					}
+				}
+			});
+			dialogView.show();
+			break;
+		case R.id.imageView:
+
+			Dialog dialog = new Dialog(PersonalInforActivity.this);
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			View view = LayoutInflater.from(PersonalInforActivity.this).inflate(
+					R.layout.dialogimage, null);
+
+			String width = dsp.get(PersonalInforActivity.this, "screenW", null);
+			int w = 0;
+			int h = 0;
+			if (width != null) {
+				w = (Integer.parseInt(width) / 3) * 2;
+				h = (Integer.parseInt(width) / 3) * 2;
+			}
+			android.view.ViewGroup.LayoutParams params2 = new android.view.ViewGroup.LayoutParams(
+					w, h);
+			view.setBackgroundDrawable(imageView.getDrawable());
+			dialog.addContentView(view, params2);
+			dialog.show();
+
+			break;
+		case R.id.updatepwd:
+			intent = new Intent(PersonalInforActivity.this, UpdatePwd.class);
+			startActivity(intent);
+			break;
+		case R.id.financial:
+			intent = new Intent(PersonalInforActivity.this, Financial.class);
+			startActivity(intent);
+			break;
+		case R.id.certif:
+			intent = new Intent(PersonalInforActivity.this, Certificates.class);
+			startActivity(intent);
+			break;
+		default:
+			break;
+		}
+	}
+
+	private boolean isExit = false;
+
+//	@Override
+//	public boolean onKeyDown(int keyCode, KeyEvent event) {
+//		if (keyCode == KeyEvent.KEYCODE_BACK) {
+//			exit();
+//			return false;
+//		}
+//		return super.onKeyDown(keyCode, event);
+//	}
+
+//	private void exit() {
+//		if (!isExit) {
+//			isExit = true;
+//			Toast.makeText(getApplicationContext(), "再按一次退出程序",
+//					Toast.LENGTH_SHORT).show();
+//			mHandler.sendEmptyMessageDelayed(0, 2000);
+//		} else {
+//			finish();
+//			System.exit(0);
+//		}
+//	}
+
+	private Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			// super.handleMessage(msg);
+			int i = msg.arg1;
+			System.out.println(i);
+			if (i == 0) {
+				isExit = false;
+			} else if (i == 1) {
+				byte[] date = (byte[]) msg.obj;
+				if (date != null) {
+					Log.i("二维码图片地址~~~~~~~~~~~~", WapConstant.URLIMAGEString
+							+ salesman.getQrcode());
+					Bitmap bitmap = BitmapFactory.decodeByteArray(date, 0,
+							date.length);
+					imageView.setImageBitmap(bitmap);
+				}
+			}
+		}
+	};
+}

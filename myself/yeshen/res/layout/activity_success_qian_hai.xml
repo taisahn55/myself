@@ -1,0 +1,102 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SuccessQianHaiActivity" >
+    
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height" >
+
+        <TextView
+            android:id="@+id/tv_back_sucess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:text="返回"
+            android:textColor="#61b44c" />
+
+        <TextView
+            android:id="@+id/tv_insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="购买成功"
+            android:textColor="#00CD00"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:text="产品已经购买成功，请查收邮件，祝您生活愉快！"
+         android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/success_produce_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:text="TextView"
+        android:textColor="@android:color/holo_red_dark" 
+         android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/success_name"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/success_produce_name"
+        android:text="您选择的" 
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/success_name"
+        android:layout_alignBottom="@+id/success_name"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+         android:padding="8dp"
+        android:text="尊敬的" />
+
+    <TextView
+        android:id="@+id/success_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_title"
+        android:layout_toRightOf="@+id/textView1"
+        android:padding="8dp"
+         android:textColor="@android:color/holo_red_dark" 
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="15dp"
+         android:layout_marginRight="20dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="22dp"
+        android:layout_marginRight="20dp"
+        android:text="建安代理" />
+
+</RelativeLayout>

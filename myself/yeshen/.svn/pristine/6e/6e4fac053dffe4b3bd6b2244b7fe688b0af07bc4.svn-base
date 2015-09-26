@@ -1,0 +1,138 @@
+package com.example.login;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.login_bean.Salesman;
+import com.example.login_main.MainActivity;
+import com.example.login_main.PersonalInforActivity;
+import com.example.login_task.HttpUtils;
+import com.example.login_utils.Constant;
+import com.example.login_utils.DateSharedPreferences;
+import com.example.login_utils.WapConstant;
+
+public class LoginActivity extends Activity implements OnClickListener {
+	private Button login_btn;
+	private TextView resign;
+	
+	private  EditText user,pwd;
+	private DateSharedPreferences dateSharedPreferences;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.login);
+		dateSharedPreferences = DateSharedPreferences.getInstance();
+		InitView();
+		
+//		Intent intent = new Intent();
+//		intent.setClass(LoginActivity.this, MainActivity.class);
+//		startActivity(intent);
+		
+	}
+	
+	private void InitView(){
+		login_btn = (Button) findViewById(R.id.login_btn);
+		login_btn.setOnClickListener(this);
+		resign = (TextView) findViewById(R.id.resign);
+		resign.setOnClickListener(this);
+		
+		user = (EditText)findViewById(R.id.user);
+		pwd = (EditText)findViewById(R.id.pwd);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.login, menu);
+		return true;
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == 200) {
+			Bundle bundle = data.getExtras();
+			user.setText(bundle.getString("user"));
+			pwd.setText(bundle.getString("pwd"));
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		Intent intent = null;
+		switch (v.getId()) {
+		case R.id.login_btn:
+			
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			Salesman sale = new Salesman();
+			sale.setPhone(user.getText().toString().trim());
+			sale.setPassWord(pwd.getText().toString().trim());
+			
+			//登陆edit判断未加全
+			if(TextUtils.isEmpty(sale.getPhone())){
+				Toast.makeText(LoginActivity.this, "手机号不能为空", Toast.LENGTH_LONG).show();
+				return;
+			}
+			if(TextUtils.isEmpty(sale.getPassWord())){
+				Toast.makeText(LoginActivity.this,"密码不能为空", Toast.LENGTH_LONG).show();
+				return;
+			}
+			params.add(new BasicNameValuePair("salesbean",Constant.getGson().toJson(sale)));
+			new Thread(new HttpUtils(mHandler,WapConstant.URLSTRING+WapConstant.LOGINString,params)).start();
+			break;
+		case R.id.resign:
+			intent = new Intent(LoginActivity.this, RegisterActivity.class);
+			startActivityForResult(intent, 200);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private Handler mHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			int code = msg.arg1;
+			if (code == 200) {
+				if (msg.obj.toString().trim().contains("sid")) {
+					Log.e("dong", "code:"+code);
+					Log.e("dong", msg.obj.toString());
+					System.out.println( msg.obj.toString());
+					dateSharedPreferences.saveLogin(LoginActivity.this, msg.obj.toString());
+					Intent intent = new Intent();
+					intent.setClass(LoginActivity.this, MainActivity.class);
+					startActivity(intent);
+					LoginActivity.this.finish();
+				} else {
+					Log.e("dong", "code:"+code);
+					Log.e("dong", "message:"+msg.obj.toString());
+					Toast.makeText(LoginActivity.this, msg.obj.toString(),
+							Toast.LENGTH_LONG).show();
+				}
+			}else{
+				Log.e("dong", code+"");
+				Log.e("dong", msg.obj.toString());
+				Toast.makeText(LoginActivity.this, "登陆失败请稍后重试",
+						Toast.LENGTH_LONG).show();
+			}
+		}
+	};
+}

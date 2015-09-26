@@ -1,0 +1,77 @@
+package com.example.login_accountinfor;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.example.login.R;
+import com.example.login_alipay.AlixDemo;
+import com.example.login_alipaybean.IPay;
+import com.example.login_main.MainActivity;
+
+
+
+public class RechargeActivity extends Activity {
+	private Button  but;
+	private EditText  edt;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_recharge);
+		but =(Button)findViewById(R.id.but_recharge);
+		edt =(EditText)findViewById(R.id.edt_recharge);
+		but.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//��ʼ֧������ʹ��
+				AlixDemo  alipay = new AlixDemo(RechargeActivity.this, new IPay() {				
+					@Override
+					public void onPayResult(boolean whether, String code) {
+						if(whether&&code=="9000"){
+								System.out.println("支付成功");
+						}else{
+							System.out.println("支付失败");
+						}
+						
+					}
+					//title
+					@Override
+					public String getOrderSubject() {
+						// TODO Auto-generated method stub
+						return "支付宝支付";
+					}				
+					@Override
+					public String getOrderPrice() {
+						// TODO Auto-generated method stub
+						return edt.getText().toString();
+					}
+					//������
+					@Override
+					public String getOrderId() {
+						// TODO Auto-generated method stub
+						return "".hashCode()+"";
+					}
+					//
+					@Override
+					public String getOrderBody() {
+						// TODO Auto-generated method stub
+						return "支付";
+					}
+				});
+				alipay.pay();
+			}
+				
+			
+		});
+	}
+
+	
+
+}
+

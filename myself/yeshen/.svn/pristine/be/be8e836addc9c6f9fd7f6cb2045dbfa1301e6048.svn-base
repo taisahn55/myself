@@ -1,0 +1,62 @@
+package com.example.login_accountinfor;
+
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.alipay.sdk.pay.demo.PayDemoActivity;
+import com.example.login.R;
+import com.example.login_bean.Salesman;
+import com.example.login_utils.Constant;
+import com.example.login_utils.DateSharedPreferences;
+
+public class AccountInforActivity extends Activity implements OnClickListener{
+	private Salesman salesman;
+	private DateSharedPreferences dsp;
+	private TextView name,phone;
+	private ImageView recharge;
+	private LinearLayout layout;
+   @Override
+protected void onCreate(Bundle savedInstanceState) {
+	// TODO Auto-generated method stub
+	super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_accountinfor);
+    dsp = DateSharedPreferences.getInstance();
+    
+   }
+   protected void onStart() {
+		salesman = Constant.getGson().fromJson(dsp.getLogin(this),
+				Salesman.class);
+		intView();
+		super.onStart();
+	}
+private void intView() {
+	// TODO Auto-generated method stub
+	name=(TextView) findViewById(R.id.account_name);
+	phone=(TextView) findViewById(R.id.tv_accountphone);
+	name.setText(salesman.getRealName());
+	phone.setText(salesman.getPhone());
+	layout=(LinearLayout) findViewById(R.id.layout_recharge);
+	layout.setOnClickListener(this);
+}
+@Override
+public void onClick(View v) {
+	// TODO Auto-generated method stub
+	switch (v.getId()) {
+	case R.id.layout_recharge:
+		 Intent intent=new Intent();
+		 intent.setClass(AccountInforActivity.this,PayDemoActivity.class);
+		 startActivity(intent);
+		break;
+
+	default:
+		break;
+	}
+}
+}

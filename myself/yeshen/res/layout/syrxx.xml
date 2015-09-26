@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tbr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/rl1_bxtbr"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#ffffff" >
+
+        <ImageView
+            android:id="@+id/account_img2"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/yonghubz" />
+
+        <TextView
+            android:id="@+id/account_blance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/account_img2"
+            android:text="@string/tbrxx"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/account_img4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/ck30" />
+
+        <TextView
+            android:id="@+id/moneyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:layout_toLeftOf="@id/account_img4" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/toubaoid"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl1_bxtbr" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="  被 保 人 :"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_tbrname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" >
+
+                    <requestFocus />
+                </EditText>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    性     别:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/tv_tbr_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:drawableRight="@drawable/ck30"
+                    android:gravity="center_vertical"
+                    android:text="     男 "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:textSize="@dimen/priduct_et_size" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="  证件类型:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/tv_tbr_certificate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ck30"
+                    android:gravity="center_vertical"
+                    android:text="    身份证"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="  证件号码:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_tbr_certificate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    出生日期:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/et_tbr_csdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:drawableRight="@drawable/ck30"
+                    android:gravity="center_vertical"
+                    android:text="  请选择日期"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="  手机号码:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_tbr_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="  电子邮件:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_tbr_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/et_xzjzd"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  现在居住地址:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_tbr_now_province"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="广东"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/tv_province"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="省"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_tbr_now_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="深圳"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/tv_tbr_nowcity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="市"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+          
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

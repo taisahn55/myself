@@ -1,0 +1,64 @@
+package com.example.login_task;
+
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+
+import com.example.login_utils.WapConstant;
+
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+
+public class HttpUtils implements Runnable {
+	private DefaultHttpClient httpClient;
+	private HttpPost post;
+
+	private Handler mHandler;
+	private String httpUrl = null;
+	private List<NameValuePair> params = null;
+
+	public HttpUtils(Handler mHandler,String httpUrl,List<NameValuePair> params) {
+		this.mHandler = mHandler;
+		this.httpUrl = httpUrl;
+		this.params = params;
+	}
+
+	@Override
+	public void run() {
+		Message msg = mHandler.obtainMessage();
+		String codeMsg = null;
+		try {
+			httpClient = new DefaultHttpClient();
+			post = new HttpPost(httpUrl);
+			post.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+			HttpResponse response = httpClient.execute(post);
+			
+			int code = response.getStatusLine().getStatusCode();
+			Log.e("dong", code+"");
+			
+			msg.arg1 = code;
+			if (code == 200) {
+				codeMsg = EntityUtils.toString(response.getEntity(), "UTF-8");
+			} else {
+				codeMsg = EntityUtils.toString(response.getEntity(), "UTF-8");
+			}
+			msg.obj = codeMsg;
+		} catch (Exception e) {
+			e.printStackTrace();
+			msg.arg1 = 0;
+			msg.obj = e.getMessage();
+		}
+		mHandler.sendMessage(msg);
+	}
+	
+
+}

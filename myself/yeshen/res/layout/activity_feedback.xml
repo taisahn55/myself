@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="#66cccc"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/suggest_imv"
+            android:layout_width="0.0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.14"
+            android:src="@drawable/ck3" />
+
+        <TextView
+            android:layout_width="0.0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.6"
+            android:gravity="center_vertical"
+            android:text="意见反馈"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/suggest_but"
+            android:layout_width="60dp"
+            android:layout_height="fill_parent"           
+            android:gravity="center_vertical|center_horizontal"
+            android:text="提交"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/suggesst"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:maxLines="4"
+        android:padding="5dp"
+        android:text="@string/suggesttion"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/suggest_et1"
+        android:layout_width="fill_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/suggesst"
+        android:layout_margin="5dp"
+        android:background="@drawable/ck4"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="@string/feedback_hint"
+        android:padding="5dp"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:id="@+id/sugges_2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/suggest_et1"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您的姓名："
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/suggest_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/ck4"
+            android:hint="@string/name_hint"
+            android:textSize="16sp" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/suggest_1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/sugges_2"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您的电话："
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/suggest_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/ck4"
+            android:ems="10"
+            android:hint="@string/phone_hint"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+# view AndroidManifest.xml #generated:43
+-keep class com.alipay.sdk.app.H5PayActivity { <init>(...); }
+
+# view res/layout/pay_main.xml #generated:15
+-keep class com.alipay.sdk.pay.demo.ExternalFragment { <init>(...); }
+
+# view AndroidManifest.xml #generated:31
+-keep class com.alipay.sdk.pay.demo.PayDemoActivity { <init>(...); }
+
+# onClick res/layout/pay_external.xml #generated:40
+-keepclassmembers class * { *** check(...); }
+
+# onClick res/layout/pay_external.xml #generated:29
+-keepclassmembers class * { *** pay(...); }
+

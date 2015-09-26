@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#D9D9D9" >
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/black" >
+
+            	<TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:paddingTop="10dp"
+                    android:text="账户信息"
+                    android:textColor="@color/whitesmoke"
+                    android:textSize="20sp" />
+                </RelativeLayout>
+    		<TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#CFCFCF" />
+    		<RelativeLayout
+      			android:layout_width="match_parent"
+      			android:layout_height="60dp"
+      			android:background="#ffffff"
+      			android:layout_marginTop="10dp" >
+                <ImageView 
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_tab_songs_unselected"
+                    android:id="@+id/account_mainimg"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                    android:id="@+id/account_name"                   
+                    android:paddingTop="10dp"
+                    android:text="账户名称"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_toRightOf="@id/account_mainimg" />
+                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                    android:id="@+id/tv_accountphone"                   
+                    android:text="183********"
+                    android:textColor="@color/dimgray"
+                    android:textSize="12sp"
+                    android:layout_below="@id/account_name"
+                    android:layout_toRightOf="@id/account_mainimg"
+                     />
+                 <ImageView 
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="@drawable/ck30"
+                     android:layout_centerVertical="true"
+                     android:layout_alignParentRight="true"
+                     android:layout_marginRight="10dp"
+                     />
+                </RelativeLayout>
+    		<TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#CFCFCF" />
+    		<TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#CFCFCF"
+                android:layout_marginTop="20dp" />      		
+    		<RelativeLayout
+      			android:layout_width="match_parent"
+      			android:layout_height="40dp"
+      			android:background="#ffffff" >
+                  <ImageView 
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ic_tab_songs_unselected"
+                    android:id="@+id/account_img2"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    />
+                   <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                    android:id="@+id/account_blance"                   
+                    android:text="@string/accountbalance"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_toRightOf="@id/account_img2"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp" />
+                   <ImageView 
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:id="@+id/account_img4" 
+                     android:background="@drawable/ck30"
+                     android:layout_centerVertical="true"
+                     android:layout_alignParentRight="true"
+                     android:layout_marginRight="10dp"
+                     />
+                   <TextView 
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="0.00"
+                       android:layout_toLeftOf="@id/account_img4"
+                       android:layout_centerVertical="true"
+                       android:layout_marginRight="10dip"
+                       />
+                  </RelativeLayout>
+                  <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#CFCFCF" /> 
+                <LinearLayout 
+                android:layout_width="match_parent"
+      			android:layout_height="40dp"
+      			android:background="#ffffff"
+      			android:orientation="horizontal"
+      			android:id="@+id/layout_recharge"
+                    >
+                <RelativeLayout
+      			android:layout_width="match_parent"
+      			android:layout_height="40dp"
+      			android:background="#ffffff" >
+                    <ImageView 
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/mine_point"
+                    android:id="@+id/account_img5"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    />
+                    <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                    android:id="@+id/account_blance"                   
+                    android:text="@string/recharge"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_toRightOf="@id/account_img5"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp" />
+                    <ImageView 
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="@drawable/ck30"
+                     android:layout_centerVertical="true"
+                     android:layout_alignParentRight="true"
+                     android:layout_marginRight="10dp"
+                     android:id="@+id/img_recharge"
+                     />
+                   </RelativeLayout> 
+                   </LinearLayout> 
+                   <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#CFCFCF" />  
+</LinearLayout>

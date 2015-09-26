@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        >
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/membercenter"
+            android:textColor="@color/maintext"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+     <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:background="#CFCFCF" />
+     <RadioGroup 
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:id="@+id/radiogroup_mainactiviy"
+         android:layout_marginTop="20dip"
+         >
+         <RadioButton 
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:id="@+id/radiobut_mainactivity_pason"
+             style="@style/mainactivity_rb"
+             android:layout_weight="1.0"
+             android:text="@string/pasonalinfor"
+             android:drawableTop="@drawable/ck14"
+             />
+         <RadioButton 
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:id="@+id/radiobut_mainactivity_account"
+             style="@style/mainactivity_rb"
+             android:layout_weight="1.0"
+             android:text="@string/accountinfor"
+             android:drawableTop="@drawable/zhifubao"
+             />
+         <RadioButton 
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:id="@+id/radiobut_mainactivity_more"
+             style="@style/mainactivity_rb"
+             android:layout_weight="1.0"
+             android:text="更多功能"
+             android:drawableTop="@drawable/dark_all"
+             />
+     </RadioGroup>
+
+</LinearLayout>

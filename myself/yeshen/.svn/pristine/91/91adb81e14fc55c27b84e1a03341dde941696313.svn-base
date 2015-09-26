@@ -1,0 +1,198 @@
+package com.example.login_main;
+
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.login.R;
+import com.example.login_bean.Salesman;
+import com.example.login_task.GetDataFromWeb;
+import com.example.login_utils.BitmapLruCache;
+import com.example.login_utils.Constant;
+import com.example.login_utils.DateSharedPreferences;
+import com.example.login_utils.WapConstant;
+import com.squareup.picasso.Picasso;
+
+public class Certificates extends Activity implements OnClickListener {
+	private TextView certiedit, text_id, cyid_text, zyid_text;
+	private ImageView certifback, text_image1, text_image2, text_image3,
+			text_image4, text_image5, text_image6;
+
+	private DateSharedPreferences dateSharedPreferences;
+	private Salesman salesman;
+	private BitmapLruCache mBitmapLruCache;
+    private String IMAGE_URL="http://123.1.149.100:8080";
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.certificates);
+		dateSharedPreferences = DateSharedPreferences.getInstance();
+		final int memory = ((ActivityManager) getSystemService(ACTIVITY_SERVICE))
+				.getMemoryClass();
+		final int cacheSize = 1024 * memory / 8;
+		mBitmapLruCache = BitmapLruCache.getInstance(cacheSize);
+		InitView();
+	}
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		InitView();
+	}
+
+	private void InitView() {
+		certiedit = (TextView) findViewById(R.id.certiedit);
+		certiedit.setOnClickListener(this);
+		certifback = (ImageView) findViewById(R.id.certifback);
+		certifback.setOnClickListener(this);
+		
+		salesman = Constant.getGson().fromJson(
+				dateSharedPreferences.getLogin(Certificates.this),
+				Salesman.class);
+
+		text_id = (TextView) findViewById(R.id.text_id);
+		text_id.setText(TextUtils.isEmpty(salesman.getIdNum()) ? "" : salesman
+				.getIdNum());
+		text_image1 = (ImageView) findViewById(R.id.text_image1);
+		if (!TextUtils.isEmpty(salesman.getIdPic1())) {
+			text_image1.setTag(salesman.getIdPic1());
+			Picasso.with(Certificates.this)
+			.load(IMAGE_URL + salesman.getIdPic1())
+			.placeholder(R.drawable.morentu).into(text_image1);
+				//getImage(text_image1, salesman.getIdPic1());
+				Log.i("图片数据~~~~~~~~~~~~~~~~~~~~~~", salesman.getIdPic1());
+
+				
+		}
+
+		text_image2 = (ImageView) findViewById(R.id.text_image2);
+		if (!TextUtils.isEmpty(salesman.getIdPic2())) {
+			text_image2.setTag(salesman.getIdPic2());
+			Picasso.with(Certificates.this)
+			.load(IMAGE_URL + salesman.getIdPic2())
+			.placeholder(R.drawable.morentu).into(text_image2);
+				//getImage(text_image2, salesman.getIdPic2());
+		}
+
+		cyid_text = (TextView) findViewById(R.id.cyid_text);
+		cyid_text.setText(TextUtils.isEmpty(salesman.getCongYe()) ? ""
+				: salesman.getCongYe());
+		text_image3 = (ImageView) findViewById(R.id.text_image3);
+		if (!TextUtils.isEmpty(salesman.getCyPic1())) {
+			text_image3.setTag(salesman.getCyPic1());
+			Picasso.with(Certificates.this)
+			.load(IMAGE_URL + salesman.getCyPic1())
+			.placeholder(R.drawable.morentu).into(text_image3);
+				//getImage(text_image3, salesman.getCyPic1());
+		}
+
+		text_image4 = (ImageView) findViewById(R.id.text_image4);
+		if (!TextUtils.isEmpty(salesman.getCyPic2())) {
+			text_image4.setTag(salesman.getCyPic2());
+			Picasso.with(Certificates.this)
+			.load(IMAGE_URL + salesman.getCyPic2())
+			.placeholder(R.drawable.morentu).into(text_image4);
+				//getImage(text_image4, salesman.getCyPic2());
+		}
+
+		zyid_text = (TextView) findViewById(R.id.zyid_text);
+		zyid_text.setText(TextUtils.isEmpty(salesman.getZhanYe()) ? ""
+				: salesman.getZhanYe());
+		text_image5 = (ImageView) findViewById(R.id.text_image5);
+		if (!TextUtils.isEmpty(salesman.getZyPic1())) {
+			text_image5.setTag(salesman.getZyPic1());
+			Picasso.with(Certificates.this)
+			.load(IMAGE_URL + salesman.getZyPic1())
+			.placeholder(R.drawable.morentu).into(text_image5);
+				//getImage(text_image5, salesman.getZyPic1());
+		}
+
+		text_image6 = (ImageView) findViewById(R.id.text_image6);
+		if (!TextUtils.isEmpty(salesman.getZyPic2())) {
+			text_image6.setTag(salesman.getZyPic2());
+			Picasso.with(Certificates.this)
+			.load(IMAGE_URL + salesman.getZyPic2())
+			.placeholder(R.drawable.morentu).into(text_image6);
+				//getImage(text_image6, salesman.getZyPic2());
+		}
+	}
+	
+	private String getFile() {
+		String url = Environment.getExternalStorageDirectory() + "" + "/Love"
+				+ "/";
+		return url;
+	}
+	private static ExecutorService executorService = Executors.newFixedThreadPool(3);
+	
+	private void getImage(final ImageView imageview,final String url) {
+		
+		executorService.execute(new Runnable() {
+			@Override
+			public void run() {
+				Bitmap bit = mBitmapLruCache.getUrlbitmap(url, url, Certificates.this);
+				String name = url.substring(url.lastIndexOf("/")+1,url.length());
+				String pathString = null;
+				if(bit==null){
+					GetDataFromWeb get = new GetDataFromWeb(Certificates.this);
+					System.out.println(pathString+"-----------------------那图片");
+					pathString = get.getData(getFile() + name, WapConstant.URLIMAGEString
+							+ url);
+					bit = mBitmapLruCache.getUrlbitmap(url, url, Certificates.this);
+					System.out.println(pathString+"-----------------------那图片");
+				}
+				Message msg = mHandler.obtainMessage();
+				msg.arg1 = 1;
+				Object[] objects = new Object[]{bit,imageview};
+				msg.obj = objects;
+				mHandler.sendMessage(msg);
+			}
+		});
+	
+	}
+
+	public Handler mHandler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			Object[] obj = (Object[]) msg.obj;
+			ImageView imageView = null;
+			if(obj!=null){
+				imageView = (ImageView) obj[1];
+				imageView.setImageBitmap((Bitmap)obj[0]);
+			}
+		};
+	};
+
+	@Override
+	public void onClick(View v) {
+		Intent intent = null;
+		switch (v.getId()) {
+		case R.id.certiedit:
+			intent = new Intent();
+			intent.setClass(Certificates.this, Editficates.class);
+			startActivity(intent);
+			break;
+		case R.id.certifback:
+			Certificates.this.finish();
+			break;
+		default:
+			break;
+		}
+	}
+
+}

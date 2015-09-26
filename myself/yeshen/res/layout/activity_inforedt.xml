@@ -1,0 +1,446 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height" >
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:text="返回"
+            android:textColor="#61b44c" />
+
+        <TextView
+            android:id="@+id/tv_insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="保险商城"
+            android:textColor="#00CD00"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/sryxx"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/zhifu"
+        android:layout_below="@id/rl_title" >
+
+        <LinearLayout
+            android:id="@+id/shouyirenid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/rl1_bxsc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:minHeight="40dp" >
+
+                <ImageView
+                    android:id="@+id/account_img2"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/yonghubz" />
+
+                <TextView
+                    android:id="@+id/account_blance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/account_img2"
+                    android:text="@string/syrxx"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/account_img4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ck30" />
+
+                <TextView
+                    android:id="@+id/moneyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dip"
+                    android:layout_toLeftOf="@id/account_img4" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="  投保人 :"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_syr_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="3dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  性     别:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/tv_syr_sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:drawableRight="@drawable/ck30"
+                    android:gravity="center_vertical"
+                    android:text="   男"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="3dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="证件类型:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/tv_syr_certificate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ck30"
+                    android:gravity="center_vertical"
+                    android:text="  身份证"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="证件号码:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_syr_certificate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="3dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  出生日期:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/et_syr_csdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:drawableRight="@drawable/ck30"
+                    android:gravity="center_vertical"
+                    android:text="请选择日期"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linerstart"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="3dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="保险开始日期:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/et_syr_startdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:drawableRight="@drawable/ck30"
+                    android:gravity="center_vertical"
+                    android:text="请选择日期"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linerend"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="3dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="保险结束日期:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/et_syr_enddate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:drawableRight="@drawable/ck30"
+                    android:gravity="center_vertical"
+                    android:text="请选择日期"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="手机号码:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_syr_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="电子邮件:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_syr_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/et_xzjzd"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  现在居住地址:"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_syr_now_province"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="广东"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/tv_province"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="省"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <EditText
+                    android:id="@+id/et_syr_now_city"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="深圳"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/tv_nowcity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="市"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+  
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/priduct_et_height"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text=" 与被保人关系 :"
+                    android:textColor="#aa000000"
+                    android:textSize="@dimen/priduct_et_size" />
+
+                <TextView
+                    android:id="@+id/tv_guanxi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ck30"
+                    android:gravity="center_vertical"
+                    android:text="   请选择关系类别"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/priduct_et_size" />
+            </LinearLayout>
+
+            <include
+                android:id="@+id/tbrxxid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/syrxx"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/zhifu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="￥ 33"
+                android:textColor="#00CD00" />
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_price"
+                android:layout_centerHorizontal="true"
+                android:text="保费试算" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/lijipay_1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@color/maintext"
+            android:gravity="center"
+            android:text="下一步"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+</RelativeLayout>
